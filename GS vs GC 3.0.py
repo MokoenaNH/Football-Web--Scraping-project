@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -
 """
 Created on Wed Oct 30 23:08:51 2024
 
@@ -9,36 +9,35 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
 
-# Function to get the team results
+
 def get_team_results(url, selected_team):
-    # Initialize the Selenium WebDriver
-    driver = webdriver.Chrome()  # Use your specific path if necessary
+   
+    driver = webdriver.Chrome() 
     driver.get(url)
 
-    # Wait for the page to fully load
-    time.sleep(5)  # Adjust this time if necessary
+    
+    time.sleep(5)  
 
-    # Get the page source after JavaScript has executed
+    
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
-    # Initialize variables to store total goals scored and conceded
     total_goals_scored = 0
     total_goals_conceded = 0
 
-    # Find all match links
-    matches = soup.find_all('a', class_='match_link__42JvI')  # Update with the correct class used for match links
+   
+    matches = soup.find_all('a', class_='match_link__42JvI')  
 
     if matches:
         for i, match in enumerate(matches, start=1):
             print(f"\nProcessing match {i}:")
             team_divs = match.find_all('div')
             
-            # Check if there are enough divs to proceed
+           
             if len(team_divs) >= 3:
-                team1 = team_divs[0].text.strip()  # First team name
+                team1 = team_divs[0].text.strip() 
                 score_span = team_divs[1].find('span', {'aria-label': 'Score'})
 
-                # Check if score span exists and retrieve score
+                
                 if score_span:
                     try:
                         score_text = score_span.get_text(strip=True)
@@ -46,7 +45,7 @@ def get_team_results(url, selected_team):
                         team2 = team_divs[2].text.strip()  # Second team name
                         print(f"Match: {team1} vs {team2} | Score: {scored} : {conceded}")
 
-                        # Check if the selected team is in team1 or team2 and update totals accordingly
+                        
                         if selected_team.lower() in team1.lower():
                             total_goals_scored += scored
                             total_goals_conceded += conceded
@@ -68,7 +67,7 @@ def get_team_results(url, selected_team):
     # Close the WebDriver
     driver.quit()
 
-# List of teams and their corresponding result URLs
+# List of teams
 team_links = {
     "Arsenal": "https://www.goal.com/en-za/team/arsenal/fixtures-results/4dsgumo7d4zupm2ugsvm4zm4d",
     "Manchester City": "https://www.goal.com/en-za/team/manchester-city/fixtures-results/a3nyxabgsqlnqfkeg41m6tnpp",
@@ -90,15 +89,15 @@ team_links = {
     "Ipswich": "https://www.goal.com/en-za/team/ipswich/fixtures-results/8b523ujgl21tbc01me65q0aoh",
     "Wolverhampton": "https://www.goal.com/en-za/team/wolverhampton/fixtures-results/b9si1jn1lfxfund69e9ogcu2n",
     "Southampton": "https://www.goal.com/en-za/team/southampton/fixtures-results/d5ydtvt96bv7fq04yqm2w2632",
-    # Add more teams and URLs here as needed
+   
 }
 
-# Display the list of teams and ask the user to select two
+
 print("Please select two teams from the list below:")
 for index, team in enumerate(team_links.keys(), start=1):
     print(f"{index}. {team}")
 
-# Get user input for the first team selection
+
 team_choice_1 = int(input("Enter the number corresponding to your first team: ")) - 1  # Convert to index
 team_names = list(team_links.keys())
 if 0 <= team_choice_1 < len(team_names):
@@ -108,8 +107,8 @@ else:
     print("Invalid selection. Exiting the program.")
     exit()
 
-# Get user input for the second team selection
-team_choice_2 = int(input("Enter the number corresponding to your second team: ")) - 1  # Convert to index
+
+team_choice_2 = int(input("Enter the number corresponding to your second team: ")) - 1  
 if 0 <= team_choice_2 < len(team_names):
     selected_team_2 = team_names[team_choice_2]
     url_input_2 = team_links[selected_team_2]
@@ -117,7 +116,7 @@ else:
     print("Invalid selection. Exiting the program.")
     exit()
 
-# Get results for both selected teams
+
 print(f"\nResults for {selected_team_1}:")
 get_team_results(url_input_1, selected_team_1)
 
