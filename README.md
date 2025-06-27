@@ -14,7 +14,7 @@ This project scrapes Premier League match data from Google Search using Python, 
 
 📌 Project Description
 
-    This script automates a Chrome browser to load the Premier League Google search results and scrapes basic match data such as:
+This script automates a Chrome browser to load the Premier League Google search results and scrapes basic match data such as:
     
     Match day fixtures
     
