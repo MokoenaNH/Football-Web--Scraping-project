@@ -42,7 +42,7 @@ def get_team_results(url, selected_team):
                     try:
                         score_text = score_span.get_text(strip=True)
                         scored, conceded = map(int, score_text.split(' : '))
-                        team2 = team_divs[2].text.strip()  # Second team name
+                        team2 = team_divs[2].text.strip() 
                         print(f"Match: {team1} vs {team2} | Score: {scored} : {conceded}")
 
                         
