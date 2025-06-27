@@ -64,7 +64,7 @@ def get_team_results(url, selected_team):
     else:
         print("No match data found.")
 
-    # Close the WebDriver
+    
     driver.quit()
 
 # List of teams
@@ -98,8 +98,7 @@ for index, team in enumerate(team_links.keys(), start=1):
     print(f"{index}. {team}")
 
 
-team_choice_1 = int(input("Enter the number corresponding to your first team: ")) - 1  # Convert to index
-team_names = list(team_links.keys())
+team_choice_1 = int(input("Enter the number corresponding to your first team: ")) - 1  
 if 0 <= team_choice_1 < len(team_names):
     selected_team_1 = team_names[team_choice_1]
     url_input_1 = team_links[selected_team_1]
